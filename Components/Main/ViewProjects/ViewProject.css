@@ -1,0 +1,27 @@
+.project {
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  width: 50%;
+}
+#container {
+  width: 100%;
+}
+.d-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#btn-project-dlt {
+  background-color: transparent;
+  color: black;
+  font-weight: bold;
+  border: none;
+}
+
+#project-date,
+#project-desc {
+  color: grey;
+  text-align: left;
+}
