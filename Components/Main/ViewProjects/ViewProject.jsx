@@ -1,21 +1,30 @@
 import "./ViewProject.css";
 import Tasks from "./Tasks";
 import { useState } from "react";
-import { TaskCtxt } from "../../../src/store/TaskContext";
 
-export default function ViewProject({ getProjectData }) {
+export default function ViewProject({ getProjectData,sendDeleteIndex }) {
   const [render, setRender] = useState();
 
-  function listTrigger(Input) {
-    getProjectData.tasks.push(Input);
-    setRender(Input);
+  function listTrigger(operation,Input) {
+    if(operation==="add"){
+      getProjectData.tasks.push(Input);
+    }
+    if(operation==="delete"){
+      getProjectData.tasks.splice(Input,1);
+    }
+
+    setRender(Math.random());
+  }
+
+  function deleteHandler(){
+    sendDeleteIndex(getProjectData.key);
   }
   return (
     <div className="project">
       <div id="container">
         <div class="d-flex">
           <h1 id="project-title">{getProjectData.title}</h1>
-          <button id="btn-project-dlt">Delete</button>
+          <button id="btn-project-dlt" onClick={deleteHandler}>Delete</button>
         </div>
         <p id="project-date">{getProjectData.date}</p>
         <p id="project-desc">{getProjectData.desc}</p>

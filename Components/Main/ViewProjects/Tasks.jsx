@@ -5,7 +5,17 @@ export default function Tasks({ taskList, sendTask }) {
 
   function taskSubmitHandler(event) {
     event.preventDefault();
-    sendTask(taskName.current.value);
+    if (taskName.current.value === "") {
+      console.log("No data");
+      return;
+    } else {
+      sendTask("add", taskName.current.value);
+      taskName.current.value = "";
+    }
+  }
+
+  function taskClearHandler(Input) {
+    sendTask("delete", Input);
   }
 
   return (
@@ -20,12 +30,18 @@ export default function Tasks({ taskList, sendTask }) {
         </div>
 
         {/* Displays list data from taskList(may be a seperate Component)*/}
-        <ul>
-          {taskList.map((element) => {
+        <ul className="task-list__items">
+          {taskList.map((element, index) => {
             return (
-              <li>
+              <li className="task-list__item">
                 {element}
-                <button>Clear</button>
+                <button
+                  onClick={() => {
+                    taskClearHandler(index);
+                  }}
+                >
+                  Clear
+                </button>
               </li>
             );
           })}
