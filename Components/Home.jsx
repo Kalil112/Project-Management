@@ -29,6 +29,14 @@ export default function Home() {
     setChosenProjectData(Input);
   }
 
+  function projectDeleteHandler(key){
+    let tempProjectData=projectData.filter((projectDataObject)=>{
+      return projectDataObject.key!==key;
+    })
+    setProjectData(tempProjectData);
+    setMain(1);
+  }
+
   switch (main) {
     case 1: {
       content = <MainPage sendBtnTrigger={contentHandler} />;
@@ -46,7 +54,7 @@ export default function Home() {
     }
 
     case 3: {
-      content = <ViewProject getProjectData={chosenProjectData} />;
+      content = <ViewProject getProjectData={chosenProjectData} sendDeleteIndex={projectDeleteHandler} />;
       break;
     }
   }
